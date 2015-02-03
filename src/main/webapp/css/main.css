@@ -22,10 +22,6 @@
 	width: 700px;
 }
 
-.cities {
-	width: 420px;
-}
-
 h3 {
 	color: blue;
 	text-align: center;
@@ -55,11 +51,6 @@ table {
 	text-decoration: none;
 }
 
-.no-decoration img {
-	width: 50px;
-	height: 50px;
-}
-
 .button:link, .button:visited {
   text-decoration: none;
   background-color: #EEEEEE;
@@ -85,26 +76,4 @@ table {
 
 .button:hover, .button:active {
     background-color: #EEEFFF;
-}
-
-.id-city-input {
-	width: 15px;
-}
-
-.name-city-input {
-	width: 150px;
-}
-
-.tempPic, .currentPic img {
-	width: 80px;
-	height: 80px;
-}
-
-.tempPic {
-	display: none;
-}
-
-.changePicCaption {
-	font-size: 10.5pt;
-	font-weight: bold;
 }

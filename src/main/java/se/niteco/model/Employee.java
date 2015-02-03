@@ -10,26 +10,16 @@ public class Employee {
 	private String team;
 	private String role;
 	private int salary;
-	private City city;
-	private String picture;
+	private int age;
 	
-	public Employee (int id, String name, String email, String team, String role, int salary, City city) {
+	public Employee (int id, String name, String email, String team, String role, int salary, int age) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.team = team;
 		this.role = role;
 		this.salary = salary;
-		this.city = city;
-		this.setPicture(null);
-	}
-	
-	public City getCity() {
-		return city;
-	}
-
-	public void setCity(City city) {
-		this.city = city;
+		this.age = age;
 	}
 
 	public int getId() {
@@ -79,11 +69,11 @@ public class Employee {
 		this.salary = salary;
 	}
 
-	public String getPicture() {
-		return picture;
+	public int getAge() {
+		return age;
 	}
 
-	public void setPicture(String picture) {
-		this.picture = picture;
+	public void setAge(int age) {
+		this.age = age;
 	}
 }

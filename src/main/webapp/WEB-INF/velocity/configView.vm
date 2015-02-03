@@ -1,5 +1,5 @@
 <form action="$configUrl" method="post">
-<input type="radio" name="mode" value="View" checked>Show employees only</input>
+<input type="radio" name="mode" value="HR" checked>HR management</input>
 <br>
-<input type="radio" name="mode" value="Edit">Remove/Edit employee</input>
+<input type="radio" name="mode" value="Dev">Dev teams management</input>
 </form> 

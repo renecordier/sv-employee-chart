@@ -25,23 +25,8 @@ import org.springframework.web.portlet.bind.annotation.RenderMapping;
  */
 @Controller
 @RequestMapping(value="CONFIG")
-public class EmployeeConfigController {
-	//DI of velocity engine
-	private VelocityEngine velocityEngine; 
-    
-    /**
-     * @param velocityEngine the velocityEngine to set
-     */
-    public void setVelocityEngine(VelocityEngine velocityEngine) {
-        this.velocityEngine = velocityEngine;
-    }
-
-    /**
-     * @return the velocityEngine
-     */
-    public VelocityEngine getVelocityEngine() {
-        return velocityEngine;
-    }
+public class EmployeeConfigController  extends EmployeeController {
+	
 	
     /**
      * Default render view of the configuration controller
@@ -80,7 +65,10 @@ public class EmployeeConfigController {
 			throws PortletException, IOException{
 		
 		pref.setValue("mode", request.getParameter("mode"));
+		pref.setValue("listEmployee", null);
 		pref.store();
+		
+		loadEmployeesList(request, pref);
 
 		response.setPortletMode(PortletMode.VIEW);
 	}

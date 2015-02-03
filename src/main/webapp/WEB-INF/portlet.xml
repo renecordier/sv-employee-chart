@@ -8,8 +8,8 @@
                         http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd">
 
     <portlet>
-        <portlet-name>NitecoEmployeePortlet</portlet-name>
-        <display-name>Niteco Employees Portlet</display-name>
+        <portlet-name>NitecoEmployeeManagement</portlet-name>
+        <display-name>Niteco employees management</display-name>
         <portlet-class>org.springframework.web.portlet.DispatcherPortlet</portlet-class>
 		<!-- <expiration-cache>0</expiration-cache>
 		<cache-scope>private</cache-scope> -->
@@ -25,36 +25,7 @@
 		</init-param>
 		-->
         <portlet-info>
-            <title>Niteco Employees</title>
-            <keywords>interactive</keywords>
-        </portlet-info>
-        
-        <portlet-preferences>
-			<preference>
-				<name>text</name>
-				<value></value>
-			</preference>
-		</portlet-preferences>
-    </portlet>
-    
-    <portlet>
-        <portlet-name>NitecoCitiesPortlet</portlet-name>
-        <display-name>Niteco Cities</display-name>
-        <portlet-class>org.springframework.web.portlet.DispatcherPortlet</portlet-class>
-		<!--<expiration-cache>60</expiration-cache>
-		<cache-scope>private</cache-scope>-->
-        <supports>
-            <mime-type>text/html</mime-type>
-            <portlet-mode>VIEW</portlet-mode>
-        </supports>
-         <!--
-		<init-param>
-			<name>contextConfigLocation</name>
-            <value>/WEB-INF/NitecoCitiesPortlet-portlet.xml</value>
-		</init-param>		
-        -->
-        <portlet-info>
-            <title>Niteco Cities</title>
+            <title>Niteco employees management</title>
             <keywords>interactive</keywords>
         </portlet-info>
         

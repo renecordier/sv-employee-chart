@@ -44,15 +44,9 @@
 		<td>$!errors.get("salary").toString()</td>
 	</tr>
 	<tr>
-		<td>City :</td>
-		<td>
-			<select name="citySelect">
-				#foreach ($city in $cities)
-				<option value="$city.cityId">$city.cityName</option>
-				#end
-			</select>
-		</td>
-		<td></td>
+		<td>Age :</td>
+		<td><input name="employeeAge" value="$!employee.get("age").toString()" /></td>
+		<td>$!errors.get("age").toString()</td>
 	</tr>
 </table>
 
