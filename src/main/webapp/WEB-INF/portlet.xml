@@ -11,21 +11,37 @@
         <portlet-name>NitecoEmployeeManagement</portlet-name>
         <display-name>Niteco employees management</display-name>
         <portlet-class>org.springframework.web.portlet.DispatcherPortlet</portlet-class>
-		<!-- <expiration-cache>0</expiration-cache>
-		<cache-scope>private</cache-scope> -->
+		
         <supports>
             <mime-type>text/html</mime-type>
             <portlet-mode>VIEW</portlet-mode>
             <portlet-mode>CONFIG</portlet-mode>
         </supports>
-        <!--
-        <init-param>
-			<name>contextConfigLocation</name>
-            <value>/WEB-INF/NitecoEmployeePortlet-portlet.xml</value>
-		</init-param>
-		-->
+        
         <portlet-info>
             <title>Niteco employees management</title>
+            <keywords>interactive</keywords>
+        </portlet-info>
+        
+        <portlet-preferences>
+			<preference>
+				<name>text</name>
+				<value></value>
+			</preference>
+		</portlet-preferences>
+    </portlet>
+    
+    <portlet>
+        <portlet-name>NitecoEmployeeChart</portlet-name>
+        <display-name>Niteco employees chart</display-name>
+        <portlet-class>org.springframework.web.portlet.DispatcherPortlet</portlet-class>
+		
+        <supports>
+            <mime-type>text/html</mime-type>
+            <portlet-mode>VIEW</portlet-mode>
+        </supports>
+        <portlet-info>
+            <title>Niteco employees chart</title>
             <keywords>interactive</keywords>
         </portlet-info>
         

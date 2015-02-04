@@ -1,0 +1,8 @@
+#parse("head.vm")
+
+<div class="portlet chart">
+<h3>Chart</h3>
+
+<img src="$chartUrl" alt="Chart" />
+
+</div>

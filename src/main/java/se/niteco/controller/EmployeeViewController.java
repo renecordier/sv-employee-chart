@@ -243,7 +243,7 @@ public class EmployeeViewController extends EmployeeController {
 			errorMap.put("salary", "Please enter a valid salary");
 		}
 		if (age == null || age.trim().equalsIgnoreCase("") || !StringUtils.isNumeric(age)) {
-			errorMap.put("salary", "Please enter a valid salary");
+			errorMap.put("age", "Please enter a valid age");
 		}
 		if (id == null || id.trim().equalsIgnoreCase("") || !StringUtils.isNumeric(id)) {
 			errorMap.put("id", "Please enter a valid id number");
