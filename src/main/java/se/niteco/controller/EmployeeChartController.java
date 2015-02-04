@@ -1,8 +1,13 @@
 package se.niteco.controller;
 
 import java.util.Arrays;
+import java.util.List;
 
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
 import javax.portlet.PortletPreferences;
+import javax.portlet.PortletURL;
+import javax.portlet.ReadOnlyException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -11,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.portlet.bind.annotation.ActionMapping;
 import org.springframework.web.portlet.bind.annotation.RenderMapping;
 
 import com.googlecode.charts4j.AxisLabels;
@@ -36,22 +42,26 @@ public class EmployeeChartController {
 	@Autowired
 	private static VelocityEngine velocityEngine;
 	
+	private final int MAX_NUMBER = 50;
+	
+	private static List<Integer> agesHR = Arrays.asList(15, 28, 7, 10, 1);
+	private static List<Integer> agesDev = Arrays.asList(5, 12, 8, 5, 4);
+	private static List<Integer> agesBoth = Arrays.asList(20, 40, 15, 15, 5);
+	
 	@RenderMapping
 	public String showChart(Model model, RenderRequest request, RenderResponse response, PortletPreferences pref){
-		final int MAX_NUMBER = 50;
-		Data ageData= DataUtil.scaleWithinRange(0, MAX_NUMBER, Arrays.asList(15, 28, 7, 10, 1));
-		BarChartPlot team1 = Plots.newBarChartPlot(ageData, Color.ORANGE, "Niteco employees");
-        //BarChartPlot team2 = Plots.newBarChartPlot(Data.newData(8, 35, 11, 5), Color.ORANGERED, "Team B");
-        //BarChartPlot team3 = Plots.newBarChartPlot(Data.newData(10, 20, 30, 30), Color.LIMEGREEN, "Team C");
+		
+		Data ageData = setDataChart(pref);
+		BarChartPlot ages = Plots.newBarChartPlot(ageData, Color.ORANGE, "Niteco employees");
 
         // Instantiating chart.
-        BarChart chart = GCharts.newBarChart(team1);
+        BarChart chart = GCharts.newBarChart(ages);
 
         // Defining axis info and styles
         AxisStyle axisStyle = AxisStyle.newAxisStyle(Color.BLACK, 13, AxisTextAlignment.CENTER);
         AxisLabels number = AxisLabelsFactory.newAxisLabels("Number", 50.0);
         number.setAxisStyle(axisStyle);
-        AxisLabels age = AxisLabelsFactory.newAxisLabels("Age range", 50.0);
+        AxisLabels age = AxisLabelsFactory.newAxisLabels("Age ranges", 50.0);
         age.setAxisStyle(axisStyle);
 
         // Adding axis info to chart.
@@ -74,6 +84,39 @@ public class EmployeeChartController {
         
         model.addAttribute("chartUrl", url);
         
+        //Set radio url
+  		PortletURL radioUrl = response.createActionURL();
+  		radioUrl.setParameter("action", "changeStats");
+  		model.addAttribute("radioUrl", radioUrl);
+  		
+  		model.addAttribute("radioValue", pref.getValue("stats", "HR"));
+        
         return "chart";
+	}
+	
+	@ActionMapping(params = "action=changeStats")
+	public void doChangeStats(ActionRequest request, ActionResponse response, PortletPreferences pref){
+		String value = request.getParameter("stats");
+		try {
+			pref.setValue("stats", value);
+			pref.store();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private Data setDataChart(PortletPreferences pref) {
+		List<Integer> ages;
+		
+		String stats = pref.getValue("stats", "HR");
+		if (stats.equals("HR"))
+			ages = agesHR;
+		else if (stats.equals("Dev"))
+			ages = agesDev;
+		else
+			ages = agesBoth;
+		
+		return DataUtil.scaleWithinRange(0, MAX_NUMBER, ages);
 	}
 }

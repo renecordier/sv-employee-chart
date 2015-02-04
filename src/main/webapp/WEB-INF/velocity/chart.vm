@@ -5,4 +5,16 @@
 
 <img src="$chartUrl" alt="Chart" />
 
+<div class="radio_chart">
+<form action="$radioUrl" method="post">
+<input type="radio" name="stats" value="HR" #if($radioValue.equals("HR"))checked#end>HR statistics</input>
+<br/>
+<input type="radio" name="stats" value="Dev" #if($radioValue.equals("Dev"))checked#end>Dev teams statistics</input>
+<br/>
+<input type="radio" name="stats" value="Both" #if($radioValue.equals("Both"))checked#end>Both</input>
+<br/>
+<input type="submit" value="Change" />
+</form>
+</div>
+
 </div>
