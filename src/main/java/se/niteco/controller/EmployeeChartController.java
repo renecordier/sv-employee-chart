@@ -1,6 +1,7 @@
 package se.niteco.controller;
 
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.portlet.ActionRequest;
@@ -44,9 +45,9 @@ public class EmployeeChartController {
 	
 	private final int MAX_NUMBER = 50;
 	
-	private static List<Integer> agesHR = Arrays.asList(15, 28, 7, 10, 1);
-	private static List<Integer> agesDev = Arrays.asList(5, 12, 8, 5, 4);
-	private static List<Integer> agesBoth = Arrays.asList(20, 40, 15, 15, 5);
+	private static List<Integer> agesHR = Arrays.asList(0,0,0,0,0);
+	private static List<Integer> agesDev = Arrays.asList(0,0,0,0,0);
+	private static List<Integer> agesBoth = Arrays.asList(0,0,0,0,0);
 	
 	@RenderMapping
 	public String showChart(Model model, RenderRequest request, RenderResponse response, PortletPreferences pref){
@@ -106,16 +107,37 @@ public class EmployeeChartController {
 		}
 	}
 	
+	public void handleAgesAlert (LinkedList<Integer> ages) {
+    	System.out.println("Receiver invoked...");
+    	try {
+	    	int flag = ages.remove(0);
+	    	switch (flag) {
+	    		case 0:	EmployeeChartController.agesHR = ages;
+	    				break;
+	    		case 1: EmployeeChartController.agesDev = ages;
+	    				break;
+	    	}
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
+    	
+    	for (int i = 0; i < agesBoth.size(); i++) {
+    		EmployeeChartController.agesBoth.set(i, (EmployeeChartController.agesHR.get(i) + EmployeeChartController.agesDev.get(i)));
+    	}
+    	
+    	System.out.println("Going out of Receiver...Bye");
+    }
+	
 	private Data setDataChart(PortletPreferences pref) {
 		List<Integer> ages;
 		
 		String stats = pref.getValue("stats", "HR");
 		if (stats.equals("HR"))
-			ages = agesHR;
+			ages = EmployeeChartController.agesHR;
 		else if (stats.equals("Dev"))
-			ages = agesDev;
+			ages = EmployeeChartController.agesDev;
 		else
-			ages = agesBoth;
+			ages = EmployeeChartController.agesBoth;
 		
 		return DataUtil.scaleWithinRange(0, MAX_NUMBER, ages);
 	}
