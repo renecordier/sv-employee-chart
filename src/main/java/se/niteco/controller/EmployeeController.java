@@ -17,8 +17,6 @@ import org.apache.velocity.app.VelocityEngine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import se.niteco.jms.AgeSender;
-import se.niteco.jms.AgeSenderImpl;
 import se.niteco.model.Employee;
 import se.niteco.service.EmployeeService;
 import se.niteco.service.EmployeeServiceImpl;
@@ -34,10 +32,6 @@ public class EmployeeController {
 	@Autowired
 	@Qualifier("employeeService")
 	protected EmployeeService service; //DI of employee service
-	
-	@Autowired
-	@Qualifier("ageSender")
-	private static AgeSender ageSender; //DI of age sender
 	
 	protected final static String META_EMPLOYEES_HR = "employeesHR";//metadata name 
 	protected final static String META_EMPLOYEES_DEV = "employeesDev";//metadata name
@@ -72,7 +66,6 @@ public class EmployeeController {
 			service = new EmployeeServiceImpl();
 		
 		String employeesJSON = null;
-		boolean init = false;
 		
 		String employeeList = pref.getValue("listEmployee", "setup");
 		if (employeeList == null || employeeList.equals("setup") || employeeList.trim().equalsIgnoreCase("")) {
@@ -97,7 +90,6 @@ public class EmployeeController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} 
-	        init = true;
 		} else {
 			employeesJSON = employeeList;
 		}
@@ -105,8 +97,6 @@ public class EmployeeController {
 		if (employeesJSON != null && employeesJSON.trim().length() > 0) {
             try {
             	service.setEmployees((List<Employee>) gson.fromJson(employeesJSON, employeesType));
-            	if (init)
-            		sendData(pref);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -136,37 +126,9 @@ public class EmployeeController {
         try {
 			pref.setValue("listEmployee", employeesJSON);
 			pref.store();
-			sendData(pref);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
-    }
-	
-	protected void sendData(PortletPreferences pref) {
-		List<Integer> ages = new LinkedList<Integer>(Arrays.asList(0,0,0,0,0,0));
-		
-		String mode = pref.getValue("mode", "");
-		if(mode.equals("Dev"))
-			ages.set(0, 1);
-		
-		for(Employee emp : service.getEmployees()) {
-			int age = emp.getAge();
-			if (age < 21)
-				ages.set(1, (ages.get(1) + 1));
-			else if(age < 31)
-				ages.set(2, (ages.get(2) + 1));
-			else if(age < 41)
-				ages.set(3, (ages.get(3) + 1));
-			else if(age < 51)
-				ages.set(4, (ages.get(4) + 1));
-			else
-				ages.set(5, (ages.get(5) + 1));
-		}
-		
-		if(ageSender == null)
-			ageSender = new AgeSenderImpl();
-		ageSender.sendEmployeeAges(ages);
-	}
-	    
+    }    
 }

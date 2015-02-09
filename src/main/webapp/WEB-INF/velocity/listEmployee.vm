@@ -1,44 +1,53 @@
 #parse("head.vm")
 
-<div class="portlet employees">
-#if ($mode.equals("HR"))
-<h3>HR employees</h3>
-#else
-<h3>Dev employees</h3>
-#end
-
-<form action="$showAddUrl" method="post">
-	#if ($employees)
-	<table class="table-portlet">
-		<tr>
-			<th>Id</th>
-			<th>Name</th>
-			<th>Email</th>
-			<th>Team</th>
-			<th>Role</th>
-			<th>Salary</th>
-			<th>Age</th>
-			<th>Actions</th>
-		</tr>
-		#foreach ($employee in $employees)
-		<tr>
-			<td>$employee.id</td>
-			<td>$employee.name</td>
-			<td>$employee.email</td>
-			<td>$employee.team</td>
-			<td>$employee.role</td>
-			<td>$employee.salary</td>
-			<td>$employee.age</td>
-			<td>
-				#set( $editEmployee = $editUrl + "&employeeId=" + $employee.id )
-                #set( $removeEmployee = $removeUrl + "&employeeId=" + $employee.id) 
-                <a href="$editEmployee" class="button">Edit</a>
-                <a href="$removeEmployee" class="button" onclick="return confirm('Are you sure to delete this employee ?')" >Delete</a>
-			</td>
-		</tr>
-		#end
-	</table>
-	#end
-	<input type="submit" value="Add employee" />
-</form>
+<div id="employee-portlet" class="container container-emp">
+	<div class="panel panel-info">
+        <div class="panel-heading">
+			#if ($mode.equals("HR"))
+			<h3 class="panel-title">HR employees</h3>
+			#else
+			<h3 class="panel-title">Dev employees</h3>
+			#end
+		</div>
+		<div class="panel-body">
+			<form action="$showAddUrl" method="post">
+				#if ($employees)
+				<table class="table table-bordered table-hover">
+					<thead>
+					<tr>
+						<th>Id</th>
+						<th>Name</th>
+						<th>Email</th>
+						<th>Team</th>
+						<th>Role</th>
+						<th>Salary</th>
+						<th>Age</th>
+						<th>Actions</th>
+					</tr>
+					</thead>
+					<tbody>
+					#foreach ($employee in $employees)
+					<tr>
+						<td>$employee.id</td>
+						<td>$employee.name</td>
+						<td>$employee.email</td>
+						<td>$employee.team</td>
+						<td>$employee.role</td>
+						<td>$employee.salary</td>
+						<td>$employee.age</td>
+						<td>
+							#set( $editEmployee = $editUrl + "&employeeId=" + $employee.id )
+			                #set( $removeEmployee = $removeUrl + "&employeeId=" + $employee.id) 
+			                <a href="$editEmployee" class="btn btn-primary btn-xs sv-a">Edit</a>
+			                <a href="$removeEmployee" class="btn btn-primary btn-xs sv-a" onclick="return confirm('Are you sure to delete this employee ?')" >Delete</a>
+						</td>
+					</tr>
+					#end
+					</tbody>
+				</table>
+				#end
+				<input type="submit" class="btn btn-primary" value="Add employee" />
+			</form>
+		</div>
+	</div>
 </div>

@@ -1,19 +1,14 @@
 package se.niteco.controller;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import javax.portlet.*;
 
 import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.portlet.bind.annotation.ActionMapping;
 import org.springframework.web.portlet.bind.annotation.RenderMapping;
 
-import se.niteco.jms.AgeSender;
 import se.niteco.model.Employee;
 
 import java.util.HashMap;
@@ -29,32 +24,6 @@ public class EmployeeViewController extends EmployeeController {
 	private Map<String, String> errorMap;//error messages when adding or editing an employee
 	private Map<String, String> valuesMap;//keeping values to show in add or edit employee
 	
-	//private boolean init = true;
-	/*
-	@PostConstruct
-	public void init(PortletPreferences pref) {
-		System.out.println("init");
-		try {
-			pref.setValue("listEmployee", null);
-			pref.store();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	@PreDestroy
-	public void destroy(PortletPreferences pref) {
-		System.out.println("destroy");
-		try {
-			pref.setValue("listEmployee", null);
-			pref.store();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}*/
-	
 	/**
 	 * Default view mode to show the list of employees
 	 * @param model
@@ -65,18 +34,6 @@ public class EmployeeViewController extends EmployeeController {
 	 */
 	@RenderMapping
 	public String showEmployee(Model model, RenderRequest request, RenderResponse response, PortletPreferences pref){
-		//init
-		/*if (init) {
-			try {
-				pref.setValue("listEmployee", null);
-				pref.store();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			init = false;
-		}*/
-		
 		//Get list of employee
 		loadEmployeesList(request, pref);
 		

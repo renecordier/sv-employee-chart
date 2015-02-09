@@ -8,7 +8,6 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletURL;
-import javax.portlet.ReadOnlyException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -42,17 +41,17 @@ import com.googlecode.charts4j.Plots;
 public class EmployeeChartController {
 	@Autowired
 	private static VelocityEngine velocityEngine;
-	
+	/*
 	private final int MAX_NUMBER = 50;
 	
 	private static List<Integer> agesHR = Arrays.asList(0,0,0,0,0);
 	private static List<Integer> agesDev = Arrays.asList(0,0,0,0,0);
 	private static List<Integer> agesBoth = Arrays.asList(0,0,0,0,0);
-	
+	*/
 	@RenderMapping
 	public String showChart(Model model, RenderRequest request, RenderResponse response, PortletPreferences pref){
 		
-		Data ageData = setDataChart(pref);
+		/*Data ageData = setDataChart(pref);
 		BarChartPlot ages = Plots.newBarChartPlot(ageData, Color.ORANGE, "Niteco employees");
 
         // Instantiating chart.
@@ -84,7 +83,7 @@ public class EmployeeChartController {
         String url = chart.toURLString();
         
         model.addAttribute("chartUrl", url);
-        
+        */
         //Set radio url
   		PortletURL radioUrl = response.createActionURL();
   		radioUrl.setParameter("action", "changeStats");
@@ -106,7 +105,7 @@ public class EmployeeChartController {
 			e.printStackTrace();
 		}
 	}
-	
+	/*
 	public void handleAgesAlert (LinkedList<Integer> ages) {
     	System.out.println("Receiver invoked...");
     	try {
@@ -140,5 +139,5 @@ public class EmployeeChartController {
 			ages = EmployeeChartController.agesBoth;
 		
 		return DataUtil.scaleWithinRange(0, MAX_NUMBER, ages);
-	}
+	}*/
 }

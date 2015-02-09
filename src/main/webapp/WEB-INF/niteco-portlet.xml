@@ -28,30 +28,6 @@
 	<context:component-scan base-package="se.niteco" /> 
 	<mvc:annotation-driven />
     <tx:annotation-driven />
-    <!--  ActiveMQ topic declaration -->
-    <amq:topic id="destination" physicalName="topicAges" />
-
-	 <!--  ActiveMQ connection factory -->
-	<amq:connectionFactory id="connectionFactory" 
-      brokerURL="tcp://localhost:61616" />
-      
-       <!-- JMS template declaration -->
-    <bean id="jmsTemplate" 
-      class="org.springframework.jms.core.JmsTemplate"
-      c:_-ref="connectionFactory" 
-      p:defaultDestinationName="topicAges" />
-      
-     <!-- Producer declaration -->  
-    <bean id="ageSender" class="se.niteco.jms.AgeSenderImpl"
-      c:_-ref="jmsTemplate" />
-    
-     <!-- Listener consumer jms -->
-    <jms:listener-container container-type="default" connection-factory="connectionFactory"
-    	acknowledge="auto" concurrency="10-50">
-  		<jms:listener destination="topicAges" 
-                ref="employeeChartController" 
-                method="handleAgesAlert" />
-	</jms:listener-container>
 
     <!-- VelocityConfig -->
     <bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">

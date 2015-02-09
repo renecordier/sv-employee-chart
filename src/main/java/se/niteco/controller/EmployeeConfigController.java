@@ -41,8 +41,6 @@ public class EmployeeConfigController  extends EmployeeController {
 	@RenderMapping
 	public String doConfig(RenderRequest request, RenderResponse response, Model model, PortletPreferences pref) 
 			throws PortletException, IOException{
-		//System.out.println("Configuration Mode");
-
 		//Set configuration URL
 		PortletURL configUrl = response.createActionURL();
 		model.addAttribute("configUrl", configUrl);
@@ -67,8 +65,6 @@ public class EmployeeConfigController  extends EmployeeController {
 		pref.setValue("mode", request.getParameter("mode"));
 		pref.setValue("listEmployee", "setup");
 		pref.store();
-		
-		//loadEmployeesList(request, pref);
 
 		response.setPortletMode(PortletMode.VIEW);
 	}

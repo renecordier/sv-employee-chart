@@ -1,60 +1,65 @@
 #parse("head.vm")
 
-<div class="portlet employees">
-#if ($addPage)
-<h3>Add employee</h3>
-#else
-<h3>Edit employee</h3>
-#end
-
-<form action="$actionUrl" method="POST">
-<table>
-	<tr>
-		<td>Id :</td>
-		<td><input name="employeeId" value="$!employee.get("id").toString()" 
-		#if(!$addPage)
-        	readonly
-        #end
-		/></td>
-		<td>$!errors.get("id").toString()</td>
-	</tr>
-	<tr>
-		<td>Name :</td>
-		<td><input name="employeeName" value="$!employee.get("name").toString()" /></td>
-		<td>$!errors.get("name").toString()</td>
-	</tr>
-	<tr>
-		<td>Email :</td>
-		<td><input name="employeeEmail" value="$!employee.get("email").toString()" /></td>
-		<td>$!errors.get("email").toString()</td>
-	</tr>
-	<tr>
-		<td>Team :</td>
-		<td><input name="employeeTeam" value="$!employee.get("team").toString()" /></td>
-		<td>$!errors.get("team").toString()</td>
-	</tr>
-	<tr>
-		<td>Role :</td>
-		<td><input name="employeeRole" value="$!employee.get("role").toString()" /></td>
-		<td>$!errors.get("role").toString()</td>
-	</tr>
-	<tr>
-		<td>Salary :</td>
-		<td><input name="employeeSalary" value="$!employee.get("salary").toString()" /></td>
-		<td>$!errors.get("salary").toString()</td>
-	</tr>
-	<tr>
-		<td>Age :</td>
-		<td><input name="employeeAge" value="$!employee.get("age").toString()" /></td>
-		<td>$!errors.get("age").toString()</td>
-	</tr>
-</table>
-
-#if ($addPage)
-<input type="submit" value="Register" />
-#else
-<input type="submit" value="Update" />
-#end
-<a href="$cancelUrl" class="button" >Cancel</a>
-</form>
+<div id="employee-portlet" class="container container-emp">
+	<div class="panel panel-info">
+        <div class="panel-heading">
+			#if ($addPage)
+			<h3 class="panel-title">Add employee</h3>
+			#else
+			<h3 class="panel-title">Edit employee</h3>
+			#end
+		</div>
+		<div class="panel-body">
+			<form action="$actionUrl" method="POST">
+				<table class="table table-condensed">
+					<tr>
+						<td>Id :</td>
+						<td><input name="employeeId" value="$!employee.get("id").toString()" 
+						#if(!$addPage)
+				        	readonly
+				        #end
+						/></td>
+						<td class="employee-error">$!errors.get("id").toString()</td>
+					</tr>
+					<tr>
+						<td>Name :</td>
+						<td><input name="employeeName" value="$!employee.get("name").toString()" /></td>
+						<td class="employee-error">$!errors.get("name").toString()</td>
+					</tr>
+					<tr>
+						<td>Email :</td>
+						<td><input name="employeeEmail" value="$!employee.get("email").toString()" /></td>
+						<td class="employee-error">$!errors.get("email").toString()</td>
+					</tr>
+					<tr>
+						<td>Team :</td>
+						<td><input name="employeeTeam" value="$!employee.get("team").toString()" /></td>
+						<td class="employee-error">$!errors.get("team").toString()</td>
+					</tr>
+					<tr>
+						<td>Role :</td>
+						<td><input name="employeeRole" value="$!employee.get("role").toString()" /></td>
+						<td class="employee-error">$!errors.get("role").toString()</td>
+					</tr>
+					<tr>
+						<td>Salary :</td>
+						<td><input name="employeeSalary" value="$!employee.get("salary").toString()" /></td>
+						<td class="employee-error">$!errors.get("salary").toString()</td>
+					</tr>
+					<tr>
+						<td>Age :</td>
+						<td><input name="employeeAge" value="$!employee.get("age").toString()" /></td>
+						<td class="employee-error">$!errors.get("age").toString()</td>
+					</tr>
+				</table>
+			
+				#if ($addPage)
+				<input type="submit" class="btn btn-primary" value="Register" name="submitEmployee" />
+				#else
+				<input type="submit" class="btn btn-primary" value="Update" name="submitEmployee" />
+				#end
+				<a href="$cancelUrl" class="btn btn-default sv-a">Cancel</a>
+			</form>
+		</div>
+	</div>
 </div>

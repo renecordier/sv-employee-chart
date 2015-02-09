@@ -2,8 +2,9 @@
 
 <div class="portlet chart">
 <h3>Chart</h3>
-
-<img src="$chartUrl" alt="Chart" />
+<p id="chartEmployee">
+<!--<img src="$chartUrl" alt="Chart" />-->
+</p>
 
 <div class="radio_chart">
 <form action="$radioUrl" method="post">
