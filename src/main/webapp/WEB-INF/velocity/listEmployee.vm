@@ -1,7 +1,7 @@
 #parse("head.vm")
 
 <div id="employee-portlet" class="container container-emp">
-	<div id="$mode" class="panel panel-info">
+	<div class="panel panel-info">
         <div class="panel-heading">
 			#if ($mode.equals("HR"))
 			<h3 class="panel-title">HR employees</h3>
@@ -12,7 +12,7 @@
 		<div class="panel-body">
 			<form action="$showAddUrl" method="post">
 				#if ($employees)
-				<table class="table table-bordered table-hover">
+				<table id="$mode" class="table table-bordered table-hover">
 					<thead>
 					<tr>
 						<th>Id</th>
