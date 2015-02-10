@@ -1,7 +1,7 @@
 #parse("head.vm")
 
 <div id="employee-portlet" class="container container-emp">
-	<div class="panel panel-info">
+	<div id="$mode" class="panel panel-info">
         <div class="panel-heading">
 			#if ($mode.equals("HR"))
 			<h3 class="panel-title">HR employees</h3>

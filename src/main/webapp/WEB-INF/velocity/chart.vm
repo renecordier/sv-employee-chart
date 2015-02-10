@@ -1,21 +1,29 @@
 #parse("head.vm")
 
-<div class="portlet chart">
-<h3>Chart</h3>
-<p id="chartEmployee">
-<!--<img src="$chartUrl" alt="Chart" />-->
-</p>
-
-<div class="radio_chart">
-<form action="$radioUrl" method="post">
-<input type="radio" name="stats" value="HR" #if($radioValue.equals("HR"))checked#end>HR statistics</input>
-<br/>
-<input type="radio" name="stats" value="Dev" #if($radioValue.equals("Dev"))checked#end>Dev teams statistics</input>
-<br/>
-<input type="radio" name="stats" value="Both" #if($radioValue.equals("Both"))checked#end>Both</input>
-<br/>
-<input type="submit" value="Change" />
-</form>
-</div>
-
+<div id="chart-portlet" class="container container-emp">
+	<div class="panel panel-info">
+        <div class="panel-heading">
+			<h3 class="panel-title">Chart</h3>
+		</div>
+		<div class="panel-body">
+			<p id="chartEmployee">
+				<!-- <img src="$chartUrl" alt="Chart" /> -->
+			</p>
+			
+			<div>
+				<form action="$selectUrl" method="post">
+					<div class="row">
+						<div class="col-md-3 col-md-offset-4">
+							<select name="stats" class="form-control select-chart">
+								<option value="HR" #if($selectValue.equals("HR"))selected#end>HR</option>
+								<option value="Dev" #if($selectValue.equals("Dev"))selected#end>Dev</option>
+								<option value="Both" #if($selectValue.equals("Both"))selected#end>Both</option>
+							</select>
+						</div>
+					</div>
+					<input type="submit" value="Change" />
+				</form>
+			</div>
+		</div>
+	</div>
 </div>

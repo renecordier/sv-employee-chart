@@ -50,8 +50,8 @@ public class EmployeeChartController {
 	*/
 	@RenderMapping
 	public String showChart(Model model, RenderRequest request, RenderResponse response, PortletPreferences pref){
-		
-		/*Data ageData = setDataChart(pref);
+		/*
+		Data ageData = setDataChart(pref);
 		BarChartPlot ages = Plots.newBarChartPlot(ageData, Color.ORANGE, "Niteco employees");
 
         // Instantiating chart.
@@ -87,9 +87,9 @@ public class EmployeeChartController {
         //Set radio url
   		PortletURL radioUrl = response.createActionURL();
   		radioUrl.setParameter("action", "changeStats");
-  		model.addAttribute("radioUrl", radioUrl);
+  		model.addAttribute("selectUrl", radioUrl);
   		
-  		model.addAttribute("radioValue", pref.getValue("stats", "HR"));
+  		model.addAttribute("selectValue", pref.getValue("stats", "HR"));
         
         return "chart";
 	}

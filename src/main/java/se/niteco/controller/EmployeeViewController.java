@@ -21,7 +21,7 @@ import java.util.Map;
 @Controller("employeePortlet")
 @RequestMapping(value="VIEW")
 public class EmployeeViewController extends EmployeeController {
-	private Map<String, String> errorMap;//error messages when adding or editing an employee
+	private Map<String, String> cssCheckingMap;//error messages when adding or editing an employee
 	private Map<String, String> valuesMap;//keeping values to show in add or edit employee
 	
 	/**
@@ -89,7 +89,7 @@ public class EmployeeViewController extends EmployeeController {
 		model.addAttribute("cancelUrl", cancelUrl);
 		
 		model.addAttribute("addPage", true);
-		model.addAttribute("errors", errorMap);
+		model.addAttribute("checkings", cssCheckingMap);
 		model.addAttribute("employee", valuesMap);
 		
 		//get list of cities
@@ -115,36 +115,46 @@ public class EmployeeViewController extends EmployeeController {
 		
 		loadEmployeesList(request, pref);
 		
-		errorMap = new HashMap<String, String>();
+		cssCheckingMap = new HashMap<String, String>();
 		if (name == null || name.trim().equalsIgnoreCase("")) {
-			errorMap.put("name", "Please enter a valid name");
+			cssCheckingMap.put("name", "has-error");
+		} else {
+			cssCheckingMap.put("name", "has-success");
 		}
 		if (email == null || email.trim().equalsIgnoreCase("")) {
-			errorMap.put("email", "Please enter a valid email");
+			cssCheckingMap.put("email", "has-error");
+		} else {
+			cssCheckingMap.put("email", "has-success");
 		}
 		if (team == null || team.trim().equalsIgnoreCase("")) {
-			errorMap.put("team", "Please enter a valid team");
+			cssCheckingMap.put("team", "has-error");
+		} else {
+			cssCheckingMap.put("team", "has-success");
 		}
 		if (role == null || role.trim().equalsIgnoreCase("")) {
-			errorMap.put("role", "Please enter a valid role");
+			cssCheckingMap.put("role", "has-error");
+		} else {
+			cssCheckingMap.put("role", "has-success");
 		}
 		if (salary == null || salary.trim().equalsIgnoreCase("") || !StringUtils.isNumeric(salary)) {
-			errorMap.put("salary", "Please enter a valid salary");
+			cssCheckingMap.put("salary", "has-error");
+		} else {
+			cssCheckingMap.put("salary", "has-success");
 		}
 		if (age == null || age.trim().equalsIgnoreCase("") || !StringUtils.isNumeric(age)) {
-			errorMap.put("age", "Please enter a valid age");
-		}
-		if (id == null || id.trim().equalsIgnoreCase("") || !StringUtils.isNumeric(id)) {
-			errorMap.put("id", "Please enter a valid id number");
+			cssCheckingMap.put("age", "has-error");
 		} else {
-			if (!service.isIdUnique(Integer.parseInt(id))) {
-				errorMap.put("id", "Id number not unique ! Please enter a valid id number");
-			}
+			cssCheckingMap.put("age", "has-success");
+		}
+		if (id == null || id.trim().equalsIgnoreCase("") || !StringUtils.isNumeric(id) || !service.isIdUnique(Integer.parseInt(id))) {
+			cssCheckingMap.put("id", "has-error");
+		} else {
+			cssCheckingMap.put("id", "has-success");
 		}
 		
 		valuesMap = new HashMap<String, String>();
 		
-		if (errorMap.isEmpty()) {
+		if (cssCheckingMap.isEmpty()) {
 			service.addEmployee(new Employee(Integer.parseInt(id), name, email, team, role, Integer.parseInt(salary), Integer.parseInt(age)));
 			try {
 				saveEmployeesList(request, pref);
@@ -205,7 +215,7 @@ public class EmployeeViewController extends EmployeeController {
 		}
 		
 		model.addAttribute("addPage", false);
-		model.addAttribute("errors", errorMap);
+		model.addAttribute("checkings", cssCheckingMap);
 		model.addAttribute("employee", valuesMap);
 		
       	model.addAttribute("request", request);
@@ -230,32 +240,46 @@ public class EmployeeViewController extends EmployeeController {
 		
 		loadEmployeesList(request, pref);
 		
-		errorMap = new HashMap<String, String>();
+		cssCheckingMap = new HashMap<String, String>();
 		if (name == null || name.trim().equalsIgnoreCase("")) {
-			errorMap.put("name", "Please enter a valid name");
+			cssCheckingMap.put("name", "has-error");
+		} else {
+			cssCheckingMap.put("name", "has-success");
 		}
 		if (email == null || email.trim().equalsIgnoreCase("")) {
-			errorMap.put("email", "Please enter a valid email");
+			cssCheckingMap.put("email", "has-error");
+		} else {
+			cssCheckingMap.put("email", "has-success");
 		}
 		if (team == null || team.trim().equalsIgnoreCase("")) {
-			errorMap.put("team", "Please enter a valid team");
+			cssCheckingMap.put("team", "has-error");
+		} else {
+			cssCheckingMap.put("team", "has-success");
 		}
 		if (role == null || role.trim().equalsIgnoreCase("")) {
-			errorMap.put("role", "Please enter a valid role");
+			cssCheckingMap.put("role", "has-error");
+		} else {
+			cssCheckingMap.put("role", "has-success");
 		}
 		if (salary == null || salary.trim().equalsIgnoreCase("") || !StringUtils.isNumeric(salary)) {
-			errorMap.put("salary", "Please enter a valid salary");
+			cssCheckingMap.put("salary", "has-error");
+		} else {
+			cssCheckingMap.put("salary", "has-success");
 		}
 		if (age == null || age.trim().equalsIgnoreCase("") || !StringUtils.isNumeric(age)) {
-			errorMap.put("age", "Please enter a valid age");
+			cssCheckingMap.put("age", "has-error");
+		} else {
+			cssCheckingMap.put("age", "has-success");
 		}
 		if (id == null || id.trim().equalsIgnoreCase("") || !StringUtils.isNumeric(id)) {
-			errorMap.put("id", "Please enter a valid id number");
+			cssCheckingMap.put("id", "has-error");
+		} else {
+			cssCheckingMap.put("id", "has-success");
 		}
 		
 		valuesMap = new HashMap<String, String>();
 		
-		if (errorMap.isEmpty()) {
+		if (cssCheckingMap.isEmpty()) {
 			service.updateEmployee(new Employee(Integer.parseInt(id), name, email, team, role, Integer.parseInt(salary), Integer.parseInt(age)));
 			try {
 				saveEmployeesList(request, pref);
@@ -302,7 +326,7 @@ public class EmployeeViewController extends EmployeeController {
 	 */
 	@ActionMapping(params = "action=cancel")
 	public void doCancel(ActionRequest request){
-		errorMap = new HashMap<String, String>();
+		cssCheckingMap = new HashMap<String, String>();
 		valuesMap = new HashMap<String, String>();
 	}
 }

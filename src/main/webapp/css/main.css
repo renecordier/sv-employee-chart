@@ -6,12 +6,20 @@
 	width: 750px;
 }
 
+#chart-portlet {
+	width: 700px;
+}
+
+#chart-portlet .panel-body {
+	text-align: center;
+}
+
 .container .panel .panel-heading {
 	background-color: #31708f;
 }
 
 .container .panel .panel-heading .panel-title {
-	color: #d9edf7;
+	color: #ffffff;
 	text-align: center;
 }
 
@@ -21,4 +29,8 @@
 
 .employee-error {
 	color: red;
+}
+
+.select-chart {
+	margin: 10px;
 }
