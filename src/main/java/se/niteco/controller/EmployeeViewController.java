@@ -113,48 +113,57 @@ public class EmployeeViewController extends EmployeeController {
 		String salary = request.getParameter("employeeSalary");
 		String age = request.getParameter("employeeAge");
 		
+		boolean error = false;
+		
 		loadEmployeesList(request, pref);
 		
 		cssCheckingMap = new HashMap<String, String>();
 		if (name == null || name.trim().equalsIgnoreCase("")) {
 			cssCheckingMap.put("name", "has-error");
+			error = true;
 		} else {
 			cssCheckingMap.put("name", "has-success");
 		}
 		if (email == null || email.trim().equalsIgnoreCase("")) {
 			cssCheckingMap.put("email", "has-error");
+			error = true;
 		} else {
 			cssCheckingMap.put("email", "has-success");
 		}
 		if (team == null || team.trim().equalsIgnoreCase("")) {
 			cssCheckingMap.put("team", "has-error");
+			error = true;
 		} else {
 			cssCheckingMap.put("team", "has-success");
 		}
 		if (role == null || role.trim().equalsIgnoreCase("")) {
 			cssCheckingMap.put("role", "has-error");
+			error = true;
 		} else {
 			cssCheckingMap.put("role", "has-success");
 		}
 		if (salary == null || salary.trim().equalsIgnoreCase("") || !StringUtils.isNumeric(salary)) {
 			cssCheckingMap.put("salary", "has-error");
+			error = true;
 		} else {
 			cssCheckingMap.put("salary", "has-success");
 		}
 		if (age == null || age.trim().equalsIgnoreCase("") || !StringUtils.isNumeric(age)) {
 			cssCheckingMap.put("age", "has-error");
+			error = true;
 		} else {
 			cssCheckingMap.put("age", "has-success");
 		}
 		if (id == null || id.trim().equalsIgnoreCase("") || !StringUtils.isNumeric(id) || !service.isIdUnique(Integer.parseInt(id))) {
 			cssCheckingMap.put("id", "has-error");
+			error = true;
 		} else {
 			cssCheckingMap.put("id", "has-success");
 		}
 		
 		valuesMap = new HashMap<String, String>();
 		
-		if (cssCheckingMap.isEmpty()) {
+		if (!error) {
 			service.addEmployee(new Employee(Integer.parseInt(id), name, email, team, role, Integer.parseInt(salary), Integer.parseInt(age)));
 			try {
 				saveEmployeesList(request, pref);
@@ -238,48 +247,57 @@ public class EmployeeViewController extends EmployeeController {
 		String salary = request.getParameter("employeeSalary");
 		String age = request.getParameter("employeeAge");
 		
+		boolean error = false;
+		
 		loadEmployeesList(request, pref);
 		
 		cssCheckingMap = new HashMap<String, String>();
 		if (name == null || name.trim().equalsIgnoreCase("")) {
 			cssCheckingMap.put("name", "has-error");
+			error = true;
 		} else {
 			cssCheckingMap.put("name", "has-success");
 		}
 		if (email == null || email.trim().equalsIgnoreCase("")) {
 			cssCheckingMap.put("email", "has-error");
+			error = true;
 		} else {
 			cssCheckingMap.put("email", "has-success");
 		}
 		if (team == null || team.trim().equalsIgnoreCase("")) {
 			cssCheckingMap.put("team", "has-error");
+			error = true;
 		} else {
 			cssCheckingMap.put("team", "has-success");
 		}
 		if (role == null || role.trim().equalsIgnoreCase("")) {
 			cssCheckingMap.put("role", "has-error");
+			error = true;
 		} else {
 			cssCheckingMap.put("role", "has-success");
 		}
 		if (salary == null || salary.trim().equalsIgnoreCase("") || !StringUtils.isNumeric(salary)) {
 			cssCheckingMap.put("salary", "has-error");
+			error = true;
 		} else {
 			cssCheckingMap.put("salary", "has-success");
 		}
 		if (age == null || age.trim().equalsIgnoreCase("") || !StringUtils.isNumeric(age)) {
 			cssCheckingMap.put("age", "has-error");
+			error = true;
 		} else {
 			cssCheckingMap.put("age", "has-success");
 		}
 		if (id == null || id.trim().equalsIgnoreCase("") || !StringUtils.isNumeric(id)) {
 			cssCheckingMap.put("id", "has-error");
+			error = true;
 		} else {
 			cssCheckingMap.put("id", "has-success");
 		}
 		
 		valuesMap = new HashMap<String, String>();
 		
-		if (cssCheckingMap.isEmpty()) {
+		if (!error) {
 			service.updateEmployee(new Employee(Integer.parseInt(id), name, email, team, role, Integer.parseInt(salary), Integer.parseInt(age)));
 			try {
 				saveEmployeesList(request, pref);

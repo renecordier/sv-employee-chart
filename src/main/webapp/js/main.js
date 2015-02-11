@@ -76,7 +76,7 @@ function displayBarChart() {
 			scaleOverride : true,
 			scaleStartValue : 0,
 			scaleSteps : 5,
-			scaleStepWidth : 1,
+			scaleStepWidth : 2,
 			xAxisLabel : "Age ranges",
 			yAxisLabel : "Number",
 			graphTitle : "Age statistics"
