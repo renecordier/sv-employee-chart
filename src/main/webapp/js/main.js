@@ -1,42 +1,20 @@
 var barChart = null;
 var ctx = null;
-var init = false;
 
 $(function(){
 	ctx = $("#chartEmployee").get(0).getContext("2d");
-	var hrtable = $("#HR");
-	var devtable = $("#Dev");
 	
-	if($(hrtable).length == 0 || $(devtable).length == 0) {
-		$("#chartEmployee").remove();
-		$("#chartArea").append('<div class="alert alert-danger">'
-    			+ '<strong>Not Found!</strong> Data source is not found.'
-    	 	+'</div>');
-	} else {
-		displayBarChart();
-		
-		$( "select[name='stats']" ).change(function(){
-			displayBarChart();
-		});
+	var select = $.cookie("selectMode");
+	if(select!="") {
+		$( "select[name='stats']" ).prop('selectedIndex', select);
 	}
 	
+	displayBarChart();
 	
-	/*$( "input[name='stats']" ).change(function(){
-		var str = $(this).val();
-		
+	$( "select[name='stats']" ).change(function(){
+		$.cookie("selectMode", $(this).prop('selectedIndex'));
+		displayBarChart();
 	});
-	//agesHR = getAgeList(mode);
-	
-	$("#chartEmployee").bind( "updateChart", function (event, ages) {
-		 $( this ).text( "hello" );
-	});
-	
-	$("input[name='submitEmployee']").click( function() {
-		$.cookie("ages", "ploppy");
-		$("#chartEmployee").trigger("updateChart", ["ages"]);
-	});
-	
-	$("#chartEmployee").text($.cookie("ages"));*/
 });
 
 function displayBarChart() {
@@ -47,8 +25,25 @@ function displayBarChart() {
 	var agesHR = [];
 	var agesDev = [];
 	
-	agesHR = agesData("#HR tbody tr td:nth-child(7)");
-	agesDev = agesData("#Dev tbody tr td:nth-child(7)");
+	var hrtable = $("#HR");
+	var devtable = $("#Dev");
+	
+	if($(hrtable).length == 0 || $(devtable).length == 0) {
+		agesHR = JSON.parse("[" + $.cookie("agesHR") + "]");
+		agesDev = JSON.parse("[" + $.cookie("agesDev") + "]");
+		if(agesHR=="" || agesDev==""){
+			$("#chartEmployee").remove();
+			$("#chartArea").append('<div class="alert alert-danger">'
+	    			+ '<strong>Not Found!</strong> Data source is not found.'
+	    	 	+'</div>');
+			return;
+		}
+	} else {
+		agesHR = agesData("#HR tbody tr td:nth-child(7)");
+		agesDev = agesData("#Dev tbody tr td:nth-child(7)");
+		$.cookie("agesHR", agesHR.toString());
+		$.cookie("agesDev", agesDev.toString());
+	}
 	
 	if (mode == "HR") {
 		_data = agesHR;
@@ -82,7 +77,7 @@ function displayBarChart() {
 			graphTitle : "Age statistics"
 	}
 	
-		barChart = new Chart(ctx).Bar(data,options);
+	barChart = new Chart(ctx).Bar(data,options);
 }
 
 function agesData (source) {

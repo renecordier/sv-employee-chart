@@ -6,25 +6,19 @@
 			<h3 class="panel-title">Chart</h3>
 		</div>
 		<div class="panel-body">
-			<!-- <p id="chartEmployee">
-				<img src="$chartUrl" alt="Chart" /> 
-			</p> -->
 			<div id="chartArea">
 				<canvas id="chartEmployee" width="400" height="400"></canvas>
 			</div>
 			<div>
-				<!--<form action="$selectUrl" method="post"> -->
 					<div class="row">
 						<div class="col-md-3 col-md-offset-4">
 							<select name="stats" class="form-control select-chart">
-								<option value="HR" #if($selectValue.equals("HR"))selected#end>HR</option>
-								<option value="Dev" #if($selectValue.equals("Dev"))selected#end>Dev</option>
-								<option value="Both" #if($selectValue.equals("Both"))selected#end>Both</option>
+								<option value="HR">HR</option>
+								<option value="Dev">Dev</option>
+								<option value="Both">Both</option>
 							</select>
 						</div>
 					</div>
-				<!--	<input type="submit" value="Change" />
-				</form>-->
 			</div>
 		</div>
 	</div>
