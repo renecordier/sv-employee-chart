@@ -14,8 +14,8 @@
 		
         <supports>
             <mime-type>text/html</mime-type>
-            <portlet-mode>VIEW</portlet-mode>
-            <portlet-mode>CONFIG</portlet-mode>
+            <portlet-mode>view</portlet-mode>
+            <portlet-mode>config</portlet-mode>
         </supports>
         
         <portlet-info>
@@ -38,7 +38,7 @@
 		
         <supports>
             <mime-type>text/html</mime-type>
-            <portlet-mode>VIEW</portlet-mode>
+            <portlet-mode>view</portlet-mode>
         </supports>
         <portlet-info>
             <title>Niteco employees chart</title>
@@ -52,8 +52,8 @@
 			</preference>
 		</portlet-preferences>
     </portlet>
-    
+    <!-- 
     <custom-portlet-mode>
 		<portlet-mode>config</portlet-mode>
-	</custom-portlet-mode>
+	</custom-portlet-mode> -->
 </portlet-app>

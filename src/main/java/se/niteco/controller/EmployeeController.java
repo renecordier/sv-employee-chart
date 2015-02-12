@@ -1,17 +1,12 @@
 package se.niteco.controller;
 
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.jcr.Node;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
-import javax.portlet.ReadOnlyException;
-import javax.portlet.ValidatorException;
 
 import org.apache.velocity.app.VelocityEngine;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,32 +62,20 @@ public class EmployeeController {
 		
 		String employeesJSON = null;
 		
-		String employeeList = pref.getValue("listEmployee", "setup");
-		if (employeeList == null || employeeList.equals("setup") || employeeList.trim().equalsIgnoreCase("")) {
-			String mode = pref.getValue("mode", "");
-			
-			String meta = META_EMPLOYEES_HR;
-			if (mode.equals("Dev"))
-				meta = META_EMPLOYEES_DEV;
-			
-			Utils utils = (Utils)request.getAttribute("sitevision.utils");
-	        PortletContextUtil pcUtil = utils.getPortletContextUtil();
-	        PropertyUtil propertyUtil = utils.getPropertyUtil();
-	        
-	        Node currentPage = pcUtil.getCurrentPage();
-	       
-	        employeesJSON = propertyUtil.getString(currentPage, meta);
-	        
-	        try {
-				pref.setValue("listEmployee", employeesJSON);
-				pref.store();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
-		} else {
-			employeesJSON = employeeList;
-		}
+		String mode = pref.getValue("mode", "");
+		
+		String meta = META_EMPLOYEES_HR;
+		if (mode.equals("Dev"))
+			meta = META_EMPLOYEES_DEV;
+		
+		Utils utils = (Utils)request.getAttribute("sitevision.utils");
+        PortletContextUtil pcUtil = utils.getPortletContextUtil();
+        PropertyUtil propertyUtil = utils.getPropertyUtil();
+        
+        Node currentPage = pcUtil.getCurrentPage();
+       
+        employeesJSON = propertyUtil.getString(currentPage, meta);
+		
 		
 		if (employeesJSON != null && employeesJSON.trim().length() > 0) {
             try {
@@ -101,7 +84,6 @@ public class EmployeeController {
                 e.printStackTrace();
             }
         }
-		 
 	}
 	
 	/**

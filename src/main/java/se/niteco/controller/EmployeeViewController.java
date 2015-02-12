@@ -19,7 +19,7 @@ import java.util.Map;
  * Portlet class of Niteco's employees
  */
 @Controller("employeePortlet")
-@RequestMapping(value="VIEW")
+@RequestMapping(value="view")
 public class EmployeeViewController extends EmployeeController {
 	private Map<String, String> cssCheckingMap;//error messages when adding or editing an employee
 	private Map<String, String> valuesMap;//keeping values to show in add or edit employee

@@ -24,7 +24,7 @@ import org.springframework.web.portlet.bind.annotation.RenderMapping;
  * Portlet class of the configuration controller
  */
 @Controller
-@RequestMapping(value="CONFIG")
+@RequestMapping(value="config")
 public class EmployeeConfigController  extends EmployeeController {
 	
 	
@@ -63,7 +63,6 @@ public class EmployeeConfigController  extends EmployeeController {
 			throws PortletException, IOException{
 		
 		pref.setValue("mode", request.getParameter("mode"));
-		pref.setValue("listEmployee", "setup");
 		pref.store();
 
 		response.setPortletMode(PortletMode.VIEW);
